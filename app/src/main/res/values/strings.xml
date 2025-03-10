@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">CSTAcademy2025UniBucIF</string>
+    <string name="title_activity_compose">ComposeActivity</string>
+    <string name="click_me">Click Me</string>
+
+    <string name="type_north">North</string>
+    <string name="type_south">South</string>
+    <string name="type_east">East</string>
+    <string name="type_west">West</string>
+</resources>
