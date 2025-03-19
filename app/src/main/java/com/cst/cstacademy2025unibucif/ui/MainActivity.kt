@@ -1,4 +1,4 @@
-package com.cst.cstacademy2025unibucif
+package com.cst.cstacademy2025unibucif.ui
 
 import android.content.Intent
 import android.os.Bundle
@@ -9,6 +9,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.cst.cstacademy2025unibucif.R
 import com.cst.cstacademy2025unibucif.models.direction.DirectionType
 
 class MainActivity : AppCompatActivity() {
@@ -24,8 +25,8 @@ class MainActivity : AppCompatActivity() {
         }
 
         findViewById<Button>(R.id.btn_click_me).setOnClickListener {
-            //goToSecondActivity()
-            changeDirection()
+            goToSecondActivity()
+//            changeDirection()
         }
 
         Log.e("TAG", "onCreate")
@@ -44,12 +45,10 @@ class MainActivity : AppCompatActivity() {
         findViewById<TextView>(R.id.tv_direction).text = getString(direction.directionNameResId)
     }
 
-    fun goToSecondActivity() {
-//        Intent intent = new Intent(this, SecondActivity.class);
-
-        val intent = Intent(this, SecondActivity::class.java)
+    private fun goToSecondActivity() {
+        val intent = Intent(this, ControllerActivity::class.java)
         startActivity(intent)
-        //finish()
+        finish()
     }
 
     override fun onStart() {

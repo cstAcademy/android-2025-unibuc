@@ -7,4 +7,9 @@
     <string name="type_south">South</string>
     <string name="type_east">East</string>
     <string name="type_west">West</string>
+    <string name="log_in">Log In</string>
+    <string name="register">Register</string>
+    <string name="home_fragment">Home Fragment</string>
+    <string name="go_to_register">Go To Register</string>
+    <string name="hint_email">Add your Email here</string>
 </resources>
