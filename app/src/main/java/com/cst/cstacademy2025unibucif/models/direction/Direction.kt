@@ -2,7 +2,7 @@ package com.cst.cstacademy2025unibucif.models.direction
 
 sealed class Direction(
     open val id: Int,
-    open val directionNameResId: DirectionType
+    open val type: DirectionType
 )
 
 data class DirectionNorth(override val id: Int) : Direction(id, DirectionType.NORTH)

@@ -12,4 +12,9 @@
     <string name="home_fragment">Home Fragment</string>
     <string name="go_to_register">Go To Register</string>
     <string name="hint_email">Add your Email here</string>
+
+    <string name="descr_north">This is north</string>
+    <string name="descr_south">This is south</string>
+    <string name="descr_east">This is east</string>
+    <string name="descr_west">This is west</string>
 </resources>
