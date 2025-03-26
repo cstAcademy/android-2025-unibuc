@@ -9,3 +9,4 @@ data class DirectionNorth(override val id: Int) : Direction(id, DirectionType.NO
 data class DirectionSouth(override val id: Int) : Direction(id, DirectionType.SOUTH)
 data class DirectionEast(override val id: Int) : Direction(id, DirectionType.EAST)
 data class DirectionWest(override val id: Int) : Direction(id, DirectionType.WEST)
+data class DirectionUnknown(override val id: Int) : Direction(id, DirectionType.UNKNOWN)

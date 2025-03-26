@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.GridLayoutManager
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.cst.cstacademy2025unibucif.R
@@ -42,24 +42,20 @@ class HomeFragment : Fragment() {
             DirectionNorth(0), DirectionSouth(1), DirectionEast(2), DirectionWest(3),
         )
 
-        val adapter = DirectionsAdapter(directions.shuffled())
-//        val layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-//        val layoutManager = GridLayoutManager(context, 3)
-        val layoutManager = GridLayoutManager(context, 6)
-        layoutManager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
-            override fun getSpanSize(position: Int): Int {
-                return when (position) {
-                    0, 1, 2 -> 2
-                    3, 4 -> 3
-                    5 -> 6
-                    else -> 2
-                }
-            }
+        val adapter = DirectionsAdapter(directions.shuffled()) {
+            goToCities()
         }
+        val layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
 
         recyclerView.apply {
             this.adapter = adapter
             this.layoutManager = layoutManager
         }
+    }
+
+    private fun goToCities() {
+        val action = HomeFragmentDirections.actionHomeFragmentToCitiesFragment()
+
+        findNavController().navigate(action)
     }
 }

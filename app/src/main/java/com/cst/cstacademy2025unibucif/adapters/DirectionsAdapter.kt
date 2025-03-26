@@ -11,7 +11,8 @@ import com.cst.cstacademy2025unibucif.models.direction.Direction
 import com.cst.cstacademy2025unibucif.models.direction.DirectionType
 
 class DirectionsAdapter(
-    val directions : List<Direction>
+    val directions : List<Direction>,
+    val onItemClick : (() -> Unit)? = null
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -72,6 +73,10 @@ class DirectionsAdapter(
 
             view.findViewById<TextView>(R.id.tv_description).text =
                 view.context.getString(type.type.directionDescriptionResId)
+
+            view.setOnClickListener {
+                onItemClick?.invoke()
+            }
         }
     }
 

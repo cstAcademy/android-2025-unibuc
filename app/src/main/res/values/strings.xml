@@ -7,6 +7,8 @@
     <string name="type_south">South</string>
     <string name="type_east">East</string>
     <string name="type_west">West</string>
+    <string name="type_unknown">Unknown</string>
+
     <string name="log_in">Log In</string>
     <string name="register">Register</string>
     <string name="home_fragment">Home Fragment</string>
@@ -17,4 +19,9 @@
     <string name="descr_south">This is south</string>
     <string name="descr_east">This is east</string>
     <string name="descr_west">This is west</string>
+    <string name="descr_unknown">Unknown direction</string>
+
+    <string name="add_city">Add city</string>
+    <string name="add_direction">Add direction</string>
+    <string name="get_all">Get all</string>
 </resources>
