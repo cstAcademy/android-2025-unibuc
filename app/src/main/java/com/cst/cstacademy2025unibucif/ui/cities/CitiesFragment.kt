@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.navArgs
 import com.cst.cstacademy2025unibucif.R
 import com.cst.cstacademy2025unibucif.data.models.CityEntityModel
 import com.cst.cstacademy2025unibucif.data.models.DirectionEntityModel
@@ -14,6 +15,9 @@ import com.cst.cstacademy2025unibucif.data.repositories.DirectionsRepository
 import com.cst.cstacademy2025unibucif.models.direction.DirectionType
 
 class CitiesFragment : Fragment() {
+    val args by navArgs<CitiesFragmentArgs>()
+    var direction: DirectionEntityModel? = null
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -25,19 +29,16 @@ class CitiesFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        getCities()
+
         view.findViewById<Button>(R.id.add_city).setOnClickListener {
-            CitiesRepository.insertCity(getRandomCity(1))
-        }
-
-        view.findViewById<Button>(R.id.add_direction).setOnClickListener {
-            val directionEntityModel = getRandomDirection(1)
-
-            DirectionsRepository.insertDirection(directionEntityModel)
-            CitiesRepository.insertCity(getRandomCity(1))
+            direction?.let {
+                CitiesRepository.insertCity(getRandomCity(it.id))
+            }
         }
 
         view.findViewById<Button>(R.id.get_all).setOnClickListener {
-            DirectionsRepository.getAllDirectionsWithCities()
+            getCities()
         }
     }
 
@@ -46,6 +47,12 @@ class CitiesFragment : Fragment() {
             id = id,
             type = DirectionType.entries.random()
         )
+    }
+
+    private fun getCities() {
+        DirectionsRepository.getCitiesByDirection(args.directionId) {
+            direction = it?.direction
+        }
     }
 
     private fun getRandomCity(id: Long) : CityEntityModel {

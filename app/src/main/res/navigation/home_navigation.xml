@@ -18,5 +18,10 @@
         android:id="@+id/citiesFragment"
         android:name="com.cst.cstacademy2025unibucif.ui.cities.CitiesFragment"
         android:label="CitiesFragment"
-        tools:layout="@layout/fragment_cities"/>
+        tools:layout="@layout/fragment_cities">
+        <argument
+            app:argType="long"
+            android:name="directionId"
+            app:nullable="false" />
+    </fragment>
 </navigation>
