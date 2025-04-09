@@ -35,6 +35,10 @@ android {
     kotlinOptions {
         jvmTarget = "11"
     }
+
+    buildFeatures {
+        buildConfig = true
+    }
 }
 
 dependencies {
@@ -73,6 +77,11 @@ dependencies {
     annotationProcessor(libs.androidx.room.compiler)
     // optional - Kotlin Extensions and Coroutines support for Room
     implementation(libs.androidx.room.ktx)
+
+    implementation(libs.retrofit)
+    implementation(libs.converter.gson) // For JSON parsing
+    implementation(libs.logging.interceptor) // Logging
+    implementation(libs.kotlinx.coroutines.android) // Coroutines
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
