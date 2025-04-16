@@ -7,10 +7,14 @@ import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.TextView
 import androidx.appcompat.widget.AppCompatEditText
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.cst.cstacademy2025unibucif.R
+import com.cst.cstacademy2025unibucif.databinding.FragmentLoginBinding
 import com.cst.cstacademy2025unibucif.helpers.extensions.isEmailValid
 import com.cst.cstacademy2025unibucif.helpers.extensions.isPasswordValid
 import com.cst.cstacademy2025unibucif.helpers.extensions.logErrorMessage
@@ -22,28 +26,37 @@ import kotlinx.coroutines.withContext
 import retrofit2.HttpException
 import java.io.IOException
 
-class LoginFragment : Fragment() {
+class LoginFragment: Fragment(), LoginListener {
+    private var _binding: FragmentLoginBinding? = null
+    private val binding get() = _binding!!
+//    private val viewModel = ViewModelProvider(this)[LoginViewModel::class.java]
+    private val viewModel by viewModels<LoginViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View = inflater.inflate(R.layout.fragment_login, container, false)
+    ): View {
+        _binding = DataBindingUtil.inflate(inflater, R.layout.fragment_login, container, false)
+
+        return binding.root
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        view.findViewById<TextView>(R.id.tv_register).setOnClickListener {
-            val email = view.findViewById<EditText>(R.id.edt_email).text.toString()
-            goToRegisterFragment(email)
-        }
-
-        view.findViewById<TextView>(R.id.btn_login).setOnClickListener {
-            doLogin()
-        }
+        binding.viewModel = viewModel
+        binding.lifecycleOwner = viewLifecycleOwner
+        binding.listener = this
     }
 
-    private fun goToRegisterFragment(email: String) {
+    override fun onDestroyView() {
+        super.onDestroyView()
+
+        _binding = null
+    }
+
+    override fun goToRegisterFragment(email: String) {
         val action = LoginFragmentDirections.actionLoginFragmentToRegisterFragment(
             email = email
         )
@@ -55,9 +68,10 @@ class LoginFragment : Fragment() {
         findNavController().navigate(action)
     }
 
-    private fun doLogin() {
-        val email = view?.findViewById<AppCompatEditText>(R.id.edt_email)?.text?.toString() ?: ""
-        val password = view?.findViewById<AppCompatEditText>(R.id.edt_password)?.text?.toString() ?: ""
+    override fun doLogin(email: String, password: String) {
+        viewModel.email.set("test2@email.com")
+
+        return
 
         if (!email.isEmailValid() || !password.isPasswordValid()) {
             context?.showDebugToast("Invalid credentials")
@@ -81,4 +95,9 @@ class LoginFragment : Fragment() {
             }
         }
     }
+}
+
+interface LoginListener {
+    fun doLogin(email: String, password: String)
+    fun goToRegisterFragment(email: String)
 }
