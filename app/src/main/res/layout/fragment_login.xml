@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
         <variable
@@ -9,6 +10,7 @@
         <variable
             name="listener"
             type="com.cst.cstacademy2025unibucif.ui.login.LoginListener" />
+        <import type="android.view.View" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -40,6 +42,14 @@
                 android:layout_marginTop="@dimen/default_space"
                 android:hint="@string/hint_email" />
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/invalid_email"
+                android:textColor="@color/red"
+                android:visibility="@{viewModel.isEmailError ? View.VISIBLE : View.GONE, default = gone}"
+                tools:visibility="visible" />
+
             <androidx.appcompat.widget.AppCompatEditText
                 android:id="@+id/edt_password"
                 android:text="@={viewModel.password}"
@@ -48,6 +58,14 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/default_space"
                 android:hint="@string/add_your_password_here" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/invalid_password"
+                android:textColor="@color/red"
+                android:visibility="@{viewModel.isPasswordError ? View.VISIBLE : View.GONE, default = gone}"
+                tools:visibility="visible" />
         </LinearLayout>
 
         <LinearLayout
@@ -63,7 +81,7 @@
 
             <Button
                 android:id="@+id/btn_login"
-                android:onClick="@{() -> listener.doLogin(viewModel.email, viewModel.password)}"
+                android:onClick="@{() -> viewModel.doLogin(viewModel.email, viewModel.password)}"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/log_in" />

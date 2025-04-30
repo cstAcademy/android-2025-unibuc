@@ -8,7 +8,9 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.databinding.DataBindingUtil
 import com.cst.cstacademy2025unibucif.R
 import com.cst.cstacademy2025unibucif.databinding.ActivityControllerBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class ControllerActivity : AppCompatActivity() {
     private lateinit var binding: ActivityControllerBinding
 

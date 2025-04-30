@@ -10,8 +10,8 @@ import androidx.navigation.fragment.navArgs
 import com.cst.cstacademy2025unibucif.R
 import com.cst.cstacademy2025unibucif.data.models.CityEntityModel
 import com.cst.cstacademy2025unibucif.data.models.DirectionEntityModel
-import com.cst.cstacademy2025unibucif.data.repositories.CitiesRepository
-import com.cst.cstacademy2025unibucif.data.repositories.DirectionsRepository
+import com.cst.cstacademy2025unibucif.data.repositories.cities.CitiesRepository
+import com.cst.cstacademy2025unibucif.data.repositories.directions.DirectionsRepository
 import com.cst.cstacademy2025unibucif.models.direction.DirectionType
 
 class CitiesFragment : Fragment() {
@@ -33,7 +33,7 @@ class CitiesFragment : Fragment() {
 
         view.findViewById<Button>(R.id.add_city).setOnClickListener {
             direction?.let {
-                CitiesRepository.insertCity(getRandomCity(it.id))
+//                CitiesRepository.insertCity(getRandomCity(it.id))
             }
         }
 
@@ -50,9 +50,9 @@ class CitiesFragment : Fragment() {
     }
 
     private fun getCities() {
-        DirectionsRepository.getCitiesByDirection(args.directionId) {
-            direction = it?.direction
-        }
+//        DirectionsRepository.getCitiesByDirection(args.directionId) {
+//            direction = it?.direction
+//        }
     }
 
     private fun getRandomCity(id: Long) : CityEntityModel {
