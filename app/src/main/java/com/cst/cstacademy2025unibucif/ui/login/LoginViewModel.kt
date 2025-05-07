@@ -9,7 +9,7 @@ import com.cst.cstacademy2025unibucif.BuildConfig
 import com.cst.cstacademy2025unibucif.helpers.extensions.isEmailValid
 import com.cst.cstacademy2025unibucif.helpers.extensions.isPasswordValid
 import com.cst.cstacademy2025unibucif.helpers.extensions.logErrorMessage
-import com.cst.cstacademy2025unibucif.networking.models.LoginAPIResponseModel
+import com.cst.cstacademy2025unibucif.networking.models.login.LoginAPIResponseModel
 import com.cst.cstacademy2025unibucif.networking.repositories.AuthenticationRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

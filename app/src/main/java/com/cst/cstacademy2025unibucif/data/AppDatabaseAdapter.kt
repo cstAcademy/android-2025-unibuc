@@ -6,6 +6,8 @@ import com.cst.cstacademy2025unibucif.data.repositories.cities.CitiesRepository
 import com.cst.cstacademy2025unibucif.data.repositories.cities.CitiesRepositoryLocal
 import com.cst.cstacademy2025unibucif.data.repositories.directions.DirectionsRepository
 import com.cst.cstacademy2025unibucif.data.repositories.directions.DirectionsRepositoryLocal
+import com.cst.cstacademy2025unibucif.data.repositories.users.UsersRepository
+import com.cst.cstacademy2025unibucif.data.repositories.users.UsersRepositoryLocal
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -35,4 +37,8 @@ class AppDatabaseAdapter {
     @Provides
     @Singleton
     fun provideDirectionsRepository(appDatabase: AppDatabase): DirectionsRepository = DirectionsRepositoryLocal(appDatabase.directionsDAO)
+
+    @Provides
+    @Singleton
+    fun provideUsersRepository(appDatabase: AppDatabase): UsersRepository = UsersRepositoryLocal(appDatabase.usersDao)
 }

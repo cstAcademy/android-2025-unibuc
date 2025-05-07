@@ -27,4 +27,6 @@
     <string name="add_your_password_here">Add your password here</string>
     <string name="invalid_email">Invalid email</string>
     <string name="invalid_password">Invalid password</string>
+    <string name="user_avatar">User avatar</string>
+    <string name="to_users">To users</string>
 </resources>

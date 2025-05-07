@@ -6,6 +6,9 @@
         <variable
             name="viewModel"
             type="com.cst.cstacademy2025unibucif.ui.home.HomeViewModel" />
+        <variable
+            name="listener"
+            type="com.cst.cstacademy2025unibucif.ui.home.HomeListener" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -24,6 +27,13 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="@{() -> listener.goToUsers()}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:text="@string/to_users" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

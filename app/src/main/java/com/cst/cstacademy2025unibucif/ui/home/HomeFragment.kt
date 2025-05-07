@@ -11,7 +11,7 @@ import com.cst.cstacademy2025unibucif.ui.DataBindingFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class HomeFragment : DataBindingFragment<FragmentHomeBinding>() {
+class HomeFragment : DataBindingFragment<FragmentHomeBinding>(), HomeListener {
     private val viewModel by viewModels<HomeViewModel>()
 
     override val layoutId: Int
@@ -21,6 +21,7 @@ class HomeFragment : DataBindingFragment<FragmentHomeBinding>() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.viewModel = viewModel
+        binding.listener = this
 
         setupObservables()
     }
@@ -38,4 +39,14 @@ class HomeFragment : DataBindingFragment<FragmentHomeBinding>() {
 
         findNavController().navigate(action)
     }
+
+    override fun goToUsers() {
+        val action = HomeFragmentDirections.actionHomeFragmentToUsersNavigation()
+
+        findNavController().navigate(action)
+    }
+}
+
+interface HomeListener {
+    fun goToUsers()
 }
