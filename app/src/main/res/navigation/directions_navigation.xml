@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/directions_navigation"
+    app:startDestination="@id/directionsFragment">
+
+    <fragment
+        android:id="@+id/directionsFragment"
+        android:name="com.cst.cstacademy2025unibucif.ui.directions.DirectionsFragment"
+        android:label="DirectionsFragment"
+        tools:layout="@layout/fragment_directions" >
+        <action
+            android:id="@+id/action_directionsFragment_to_citiesFragment"
+            app:destination="@id/citiesFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/citiesFragment"
+        android:name="com.cst.cstacademy2025unibucif.ui.cities.CitiesFragment"
+        android:label="CitiesFragment"
+        tools:layout="@layout/fragment_cities">
+        <argument
+            app:argType="long"
+            android:name="directionId"
+            app:nullable="false" />
+    </fragment>
+</navigation>

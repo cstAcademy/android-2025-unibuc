@@ -1,5 +1,6 @@
 package com.cst.cstacademy2025unibucif.ui
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -7,6 +8,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
+import com.cst.cstacademy2025unibucif.managers.SharedPreferencesManager
 
 abstract class DataBindingFragment<VB : ViewDataBinding> : Fragment() {
 
@@ -26,5 +28,15 @@ abstract class DataBindingFragment<VB : ViewDataBinding> : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    protected fun doLogout() {
+        activity?.apply {
+            SharedPreferencesManager.removeAuthToken()
+
+            startActivity(Intent(this, ControllerActivity::class.java))
+
+            finish()
+        }
     }
 }

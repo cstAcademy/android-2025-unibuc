@@ -9,6 +9,7 @@ import com.cst.cstacademy2025unibucif.BuildConfig
 import com.cst.cstacademy2025unibucif.helpers.extensions.isEmailValid
 import com.cst.cstacademy2025unibucif.helpers.extensions.isPasswordValid
 import com.cst.cstacademy2025unibucif.helpers.extensions.logErrorMessage
+import com.cst.cstacademy2025unibucif.managers.SharedPreferencesManager
 import com.cst.cstacademy2025unibucif.networking.models.login.LoginAPIResponseModel
 import com.cst.cstacademy2025unibucif.networking.repositories.AuthenticationRepository
 import kotlinx.coroutines.Dispatchers
@@ -57,6 +58,9 @@ class LoginViewModel : ViewModel() {
                 }
 
                 _isLoginFinished.value = res
+
+                SharedPreferencesManager.setAuthToken(res.token)
+
                 res.token.logErrorMessage()
             } catch (e: IOException) {
                 "Please check your internet connection".logErrorMessage()

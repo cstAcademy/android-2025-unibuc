@@ -11,21 +11,19 @@
         android:label="HomeFragment"
         tools:layout="@layout/fragment_home">
         <action
-            android:id="@+id/action_homeFragment_to_citiesFragment"
-            app:destination="@id/citiesFragment" />
-        <action
             android:id="@+id/action_homeFragment_to_users_navigation"
             app:destination="@id/users_navigation" />
+        <action
+            android:id="@+id/action_homeFragment_to_directions_navigation"
+            app:destination="@id/directions_navigation" />
+<!--        <action-->
+<!--            android:id="@+id/action_homeFragment_to_authentication_navigation"-->
+<!--            app:destination="@id/authentication_navigation"-->
+<!--            app:popUpToInclusive="true"-->
+<!--            app:popUpTo="@id/home_navigation" />-->
     </fragment>
-    <fragment
-        android:id="@+id/citiesFragment"
-        android:name="com.cst.cstacademy2025unibucif.ui.cities.CitiesFragment"
-        android:label="CitiesFragment"
-        tools:layout="@layout/fragment_cities">
-        <argument
-            app:argType="long"
-            android:name="directionId"
-            app:nullable="false" />
-    </fragment>
+
     <include app:graph="@navigation/users_navigation" />
+    <include app:graph="@navigation/directions_navigation" />
+<!--    <include app:graph="@navigation/authentication_navigation" />-->
 </navigation>

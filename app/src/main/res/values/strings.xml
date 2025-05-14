@@ -29,4 +29,6 @@
     <string name="invalid_password">Invalid password</string>
     <string name="user_avatar">User avatar</string>
     <string name="to_users">To users</string>
+    <string name="to_directions">To directions</string>
+    <string name="logout">Logout</string>
 </resources>

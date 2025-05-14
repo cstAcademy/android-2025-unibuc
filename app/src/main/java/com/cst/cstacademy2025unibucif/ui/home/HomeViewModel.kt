@@ -19,30 +19,6 @@ import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @HiltViewModel
-class HomeViewModel @Inject constructor(
-    private val directionsRepository: DirectionsRepository
-): ViewModel() {
-    private val _isInsertFinished = MutableLiveData<Direction>()
-    val isInsertFinished: LiveData<Direction>
-        get() = _isInsertFinished
+class HomeViewModel @Inject constructor(): ViewModel() {
 
-    private val directions = arrayListOf(
-        DirectionNorth(0), DirectionSouth(1), DirectionEast(2), DirectionWest(3)
-    )
-
-    val adapter = DirectionsAdapter(directions.shuffled()) { direction ->
-        insertDirectionToDb(direction)
-    }
-
-    private fun insertDirectionToDb(direction: Direction) {
-        val directionEntity = DirectionEntityModel(direction.id, direction.type)
-
-        viewModelScope.launch {
-            withContext(Dispatchers.IO) {
-                directionsRepository.insertDirection(directionEntity)
-            }
-
-            _isInsertFinished.value = direction
-        }
-    }
 }

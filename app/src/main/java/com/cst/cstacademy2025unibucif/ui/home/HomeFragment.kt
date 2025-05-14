@@ -6,6 +6,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.cst.cstacademy2025unibucif.R
 import com.cst.cstacademy2025unibucif.databinding.FragmentHomeBinding
+import com.cst.cstacademy2025unibucif.managers.SharedPreferencesManager
 import com.cst.cstacademy2025unibucif.models.direction.Direction
 import com.cst.cstacademy2025unibucif.ui.DataBindingFragment
 import dagger.hilt.android.AndroidEntryPoint
@@ -22,22 +23,6 @@ class HomeFragment : DataBindingFragment<FragmentHomeBinding>(), HomeListener {
 
         binding.viewModel = viewModel
         binding.listener = this
-
-        setupObservables()
-    }
-
-    private fun setupObservables() {
-        viewModel.isInsertFinished.observe(viewLifecycleOwner) { direction ->
-            direction?.apply {
-                goToCities(this)
-            }
-        }
-    }
-
-    private fun goToCities(direction: Direction) {
-        val action = HomeFragmentDirections.actionHomeFragmentToCitiesFragment(direction.id)
-
-        findNavController().navigate(action)
     }
 
     override fun goToUsers() {
@@ -45,8 +30,20 @@ class HomeFragment : DataBindingFragment<FragmentHomeBinding>(), HomeListener {
 
         findNavController().navigate(action)
     }
+
+    override fun goToDirections() {
+        val action = HomeFragmentDirections.actionHomeFragmentToDirectionsNavigation()
+
+        findNavController().navigate(action)
+    }
+
+    override fun logout() {
+        this.doLogout()
+    }
 }
 
 interface HomeListener {
     fun goToUsers()
+    fun goToDirections()
+    fun logout()
 }
