@@ -1,3 +1,7 @@
+import org.gradle.api.internal.properties.GradleProperties
+import org.gradle.buildinit.plugins.internal.GradlePropertiesGenerator
+import java.util.Properties
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
@@ -5,6 +9,14 @@ plugins {
     id("com.google.devtools.ksp")
     id("kotlin-kapt")
     id("com.google.dagger.hilt.android")
+}
+
+val localProperties = Properties().apply {
+    val localPropertiesFile = rootProject.file("local.properties")
+
+    if (localPropertiesFile.exists()) {
+        localPropertiesFile.inputStream().use { load(it) }
+    }
 }
 
 android {
@@ -41,6 +53,35 @@ android {
     buildFeatures {
         buildConfig = true
         dataBinding = true
+    }
+}
+
+android {
+    flavorDimensions += listOf("environment")
+
+    productFlavors {
+        create("dev") {
+            dimension = "environment"
+            applicationIdSuffix = ".dev"
+            manifestPlaceholders["appName"] = "Dev App"
+
+            val devBaseUrl = project.properties["dev_base_url"] ?: "http://localhost:8080/"
+            buildConfigField("String", "ENVIRONMENT", devBaseUrl.toString())
+
+            val devReqresApiKey = localProperties.getProperty("dev_reqres_api_key") ?: "default"
+            buildConfigField("String", "REQRES_API_KEY", "\"$devReqresApiKey\"")
+        }
+
+        create("prod") {
+            dimension = "environment"
+            manifestPlaceholders["appName"] = "Prod App"
+
+            val prodBaseUrl = project.properties["prod_base_url"] ?: "http://localhost:8080/"
+            buildConfigField("String", "ENVIRONMENT", prodBaseUrl.toString())
+
+            val prodReqresApiKey = localProperties.getProperty("prod_reqres_api_key") ?: "default"
+            buildConfigField("String", "REQRES_API_KEY", "\"$prodReqresApiKey\"")
+        }
     }
 }
 

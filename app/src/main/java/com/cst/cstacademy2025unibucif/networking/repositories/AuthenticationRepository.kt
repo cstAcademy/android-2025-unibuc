@@ -7,7 +7,7 @@ import com.cst.cstacademy2025unibucif.networking.models.login.LoginAPIResponseMo
 
 object AuthenticationRepository {
     private val retrofitService: AuthenticationAPIService by lazy {
-        RetrofitClient.instance.create(AuthenticationAPIService::class.java)
+        RetrofitClient.noAuthInstance.create(AuthenticationAPIService::class.java)
     }
 
     suspend fun doLogin(email: String, password: String) : LoginAPIResponseModel {
